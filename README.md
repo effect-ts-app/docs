@@ -5,6 +5,8 @@ in a statically typed functional style in the latest of Typescript.
 Compiler extensions through ts-plus are [recommended](https://dev.to/effect-ts/the-case-for-ts-18b3), yet not required.
 It allows for a compiler/type driven development, where often, if it compiles, your program is probably quite correct :) Reducing the need for boilerplate testing and providing you a level of confidence out of the box.
 
+We aim to provide defaults in the box which are useful to 80% of the apps you want to build.
+
 ## Models and Resources
 
 All data modeling is [Schema](https://github.com/effect-ts-app/libs/tree/main/packages/schema) based. It powers the strong domain modelling, RPC (client+api controllers), database schema, input/form schemas, providing a single source of truth for all models and refined primitives.
@@ -34,6 +36,16 @@ TBD
 
 TBD
 
+in the box are adapters for:
+
+- in memory (`mem://`): great for testing locally, no resilience, only works within a single process (but you can of course compose multiple service entrypoints into a single app).
+- Azure ServiceBus: (`Endpoint=`)
+- _adding your own is a piece of cake_
+
+## Long Running Operations
+
+TBD
+
 ## UI Events
 
 TBD
@@ -55,13 +67,14 @@ There is the Persistence Model (how does the data look like within the data stor
 
 ### Adapters
 
-In the box are adapters for
+In the box `Store` are adapters for
 
 - memory (`memdb://`): good for local development, tests, single instance, no need for migrations
 - disk (`diskdb://.data`): good for local development, tests, single instance, migrations optional
 - redis (`redis://`...): good for dev instances, single instance, migrations optional
 - CosmosDB (`AccountEndpoint=`): production ready, multi instance support
-- Mongo (`mongo://`...): production ready, multi instance support
+- Mongo (WIP) (`mongo://`...): production ready, multi instance support
+- _adding your own is a piece of cake_
 
 ### Transactions
 
@@ -91,6 +104,6 @@ During saving operations you can include events (domain or integration events), 
 Often an Event needs to be published on a Queue or MessageBus, after the data has been successfuly saved.
 To make this even more durable, you can save the events within the same database transaction, so that if reaching a queue fails after saving or the process is terminated, you can reconsile this by replaying unprocessed events from the database.
 
-The [`Pure`](https://github.com/effect-ts-app/libs/blob/main/packages/prelude/_src/Pure.ts) type helps you to build logic that builds or updates state,
+The [Pure](https://github.com/effect-ts-app/libs/blob/main/packages/prelude/_src/Pure.ts) type helps you to build logic that builds or updates state,
 and logs events to be picked up by the save and publish. It composes nicely.
 Which is inspired by [ZPure](https://zio.github.io/zio-prelude/docs/zpure/)
