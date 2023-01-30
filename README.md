@@ -4,7 +4,36 @@ WIP
 
 ## Models and Resources
 
-All data modeling is Schema based.
+All data modeling is (Schema)[https://github.com/effect-ts-app/libs/tree/main/packages/schema] based.
+
+## Data type architecture/hierarchy
+
+Sketch..
+
+![alt text](doc/img/data-arch.png)
+
+## Concepts
+
+- Applications
+  - API - private business logic, endpoints with resources for UI
+  - UI - views and public business logic, uses derived clients to talk to endpoints on the API
+- Messages - talk between API/Worker services
+- Resources - talk between UI and API - think REST resources, actions, view models.
+- Models - domain core types, many others are derived from these
+
+### Queries (read) & Commands/Mutations (write)
+
+TBD
+
+## Messaging Queues
+
+TBD
+
+## UI Events
+
+TBD
+
+- Published to UI via Server Sent Events
 
 ## Database
 
@@ -43,31 +72,12 @@ which will ignore previous data, and store under a new namespace.
 By default, optimistic concurrency is used via an `_etag` field. If the `_etag` on a record changed between reading the record, and updating the record,
 an `OptimisticConcurrencyException` is thrown. You will need to handle it as appropriate for your case.
 
-## Data type architecture/hierarchy
+### Domain & Integration Events
 
-Sketch..
+During saving operations you can include events (domain or integration events), each repository decides what events to support and what to do with them.
+Often an Event needs to be published on a Queue or MessageBus, after the data has been successfuly saved.
+To make this even more durable, you can save the events within the same database transaction, so that if reaching a queue fails after saving or the process is terminated, you can reconsile this by replaying unprocessed events from the database.
 
-![alt text](doc/img/data-arch.png)
-
-## Concepts
-
-- Applications
-  - API - private business logic, endpoints with resources for UI
-  - UI - views and public business logic, uses derived clients to talk to endpoints on the API
-- Messages - talk between API/Worker services
-- Resources - talk between UI and API - think REST resources, actions, view models.
-- Models - domain core types, many others are derived from these
-
-### Queries (read) & Commands/Mutations (write)
-
-TBD
-
-## Messaging Queues
-
-TBD
-
-### Events
-
-TBD
-
-- Published to UI via Server Sent Events
+The [`Pure`](https://github.com/effect-ts-app/libs/blob/main/packages/prelude/_src/Pure.ts) type helps you to build logic that builds or updates state,
+and logs events to be picked up by the save and publish. It composes nicely.
+Which is inspired by [ZPure](https://zio.github.io/zio-prelude/docs/zpure/)
