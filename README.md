@@ -42,6 +42,8 @@ in the box are adapters for:
 - Azure ServiceBus: (`Endpoint=`)
 - _adding your own is a piece of cake_
 
+(All of these are based on established community or vendor libraries)
+
 ## Long Running Operations
 
 TBD
@@ -76,9 +78,17 @@ In the box `Store` are adapters for
 - Mongo (WIP) (`mongo://`...): production ready, multi instance support
 - _adding your own is a piece of cake_
 
+(All of these are based on established community or vendor libraries)
+
 ### Transactions
 
-While basic transaction support for ACID operations is possible, it is recommended to design mutations in non corruptive ways.
+While basic transaction support for ACID operations is possible, it is often limited to one collection and perhaps 100 records at a time,
+therefore it is recommended to design mutations in non corruptive ways, and consider reconciliation options.
+
+e.g:
+
+- remove links before removing the actual record
+- design in a way where you can process batches
 
 ### Migrations
 
@@ -107,3 +117,8 @@ To make this even more durable, you can save the events within the same database
 The [Pure](https://github.com/effect-ts-app/libs/blob/main/packages/prelude/_src/Pure.ts) type helps you to build logic that builds or updates state,
 and logs events to be picked up by the save and publish. It composes nicely.
 Which is inspired by [ZPure](https://zio.github.io/zio-prelude/docs/zpure/)
+
+## Links
+
+- [Boilerplate](https://github.com/effect-ts-app/boilerplate)
+- The actual [framework](https://github.com/effect-ts-app/libs)
