@@ -1,10 +1,12 @@
 # README
 
-WIP
+Effect App is a light-weight framework to build resilient and fully type-safe services and apps with [Effect](https://github.com/Effect-TS/effect) and [FP-TS](https://github.com/fp-ts/core),
+in a statically typed functional style in the latest of Typescript.
+Compiler extensions through ts-plus are [recommended](https://dev.to/effect-ts/the-case-for-ts-18b3), yet not required.
 
 ## Models and Resources
 
-All data modeling is [Schema](https://github.com/effect-ts-app/libs/tree/main/packages/schema) based.
+All data modeling is [Schema](https://github.com/effect-ts-app/libs/tree/main/packages/schema) based. It powers the strong domain modelling, RPC (client+api controllers), database schema, input/form schemas, providing a single source of truth for all models and refined primitives.
 
 ## Data type architecture/hierarchy
 
