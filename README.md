@@ -4,7 +4,7 @@ WIP
 
 ## Models and Resources
 
-All data modeling is (Schema)[https://github.com/effect-ts-app/libs/tree/main/packages/schema] based.
+All data modeling is [Schema](https://github.com/effect-ts-app/libs/tree/main/packages/schema) based.
 
 ## Data type architecture/hierarchy
 
@@ -34,6 +34,14 @@ TBD
 TBD
 
 - Published to UI via Server Sent Events
+
+## Configuration
+
+Configuration is specified in API `config.ts` files, and leverages the built-in Effect Config.
+
+## Logging
+
+Logging defaults to the logfmt format. It's recommended to use [humanlog](https://github.com/humanlogio/humanlog) for improved formatting and highlighting, especially of embedded JSON payloads.
 
 ## Database
 
