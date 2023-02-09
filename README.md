@@ -71,8 +71,8 @@ There is the Persistence Model (how does the data look like within the data stor
 
 In the box `Store` are adapters for
 
-- memory (`memdb://`): good for local development, tests, single instance, no need for migrations
-- disk (`diskdb://.data`): good for local development, tests, single instance, migrations optional
+- memory (`mem://`): good for local development, tests, single instance, no need for migrations
+- disk (`disk://.data`): good for local development, tests, single instance, migrations optional
 - redis (`redis://`...): good for dev instances, single instance, migrations optional
 - CosmosDB (`AccountEndpoint=`): production ready, multi instance support
 - Mongo (WIP) (`mongo://`...): production ready, multi instance support
