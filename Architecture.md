@@ -84,11 +84,11 @@ Another application used in a warehouse may handle the inventory, packaging and 
 
 ## Controller
 
-A `Controller` is a piece of application-specific logic. A `Conteoller` defines a single capability of the application such as creating `Order`s. `Controller`s use the logic defined in `Core` and use injected dependencies (through inversion of control) to handle communication with external `Service`s.
+A `Controller` is a piece of application-specific logic. A `Controller` defines a single capability of the application such as creating `Order`s. `Controller`s use the logic defined in `Core` and use injected dependencies (through inversion of control) to handle communication with external `Service`s.
 
 ## Service
 
-A `Service` provides a dependency needed by a `Controller`.
+A `Service` provides a dependency to other components. `Service`s can be used in multiple places in the architecture such as a `Controller`.
 
 Examples of `Service` are `Repository`s or database pool connections.
 
@@ -100,7 +100,7 @@ An example of a `Repository` is a for our `Order` `Entity` would be an `OrderRep
 
 ## Resource
 
-A `Resource` provides specific `Request/Response` messages that `Controller`s take as input or return as output.
+A `Resource` provides specific `Request/Response` messages. `Controller`s leverage `Resource`s to provide endpoints, and `Client`s leverage them to derive fully-typed interfaces to such endpoints.
 
 ## View
 
