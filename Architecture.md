@@ -41,7 +41,7 @@ This avoids one common pitfall of many enterprise software where business (or `C
 
 An `Entity` encapsulates and abstracts a _business domain object_.
 
-In `effect-ts-app` `Entity`s are defined through `Schema`s defined in `types` packages.
+In `effect-ts-app` `Entity`s are defined through `Schema`s defined in `models` packages.
 
 Behaviour, the _what_, _how_, and _when_ we can operate on and with this data is defined in `Core` modules in `api` packages. Behaviour encodes the rules of the business.
 
